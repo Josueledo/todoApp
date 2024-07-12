@@ -1,0 +1,77 @@
+<div class="container">
+  <header>
+    <ul>
+      <li>
+        <mat-icon
+        aria-hidden="false"
+        aria-label="Example bolt icon"
+        fontIcon="bolt"
+        ></mat-icon>
+      </li>
+      <li>TODO-LIST</li>
+      <li (click)="openDialog()">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example add icon"
+          fontIcon="add"
+        ></mat-icon>
+      </li>
+    </ul>
+    <div class="date">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example calendar_month icon"
+        fontIcon="calendar_month"
+      ></mat-icon>
+      {{ monthName[data.getMonth()] }}, {{ data.getFullYear() }}
+    </div>
+  </header>
+  <ul class="daysContainer">
+    @for (days of listDays; track $index) { @if(days.day === day){
+    <li class="daysItem selected" (click)="changeDay(days.day)">
+      <span>{{ days.day }}</span>
+      <span class="dayName">{{ days.dayName }}</span>
+    </li>
+    } @else {
+    <li class="daysItem" (click)="changeDay(days.day)">
+      <span>{{ days.day }}</span>
+      <span class="dayName">{{ days.dayName }}</span>
+    </li>
+    } }
+  </ul>
+
+  <div
+    class="edit"
+    cdkDropList
+    #editList="cdkDropList"
+    [cdkDropListData]="edit"
+    [cdkDropListConnectedTo]="listTask"
+    (cdkDropListDropped)="drop($event)"
+  ></div>
+  <div
+    class="delete"
+    cdkDropList
+    #deleteList="cdkDropList"
+    [cdkDropListData]="delete"
+    [cdkDropListConnectedTo]="listTask"
+    (cdkDropListDropped)="drop($event)"
+  ></div>
+  <div
+    class="tasks"
+    cdkDropList
+    #listTask="cdkDropList"
+    [cdkDropListData]="listTasks"
+    [cdkDropListConnectedTo]="[deleteList, editList]"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h1>Today's task</h1>
+    <ul>
+      @for (task of listTasks; track $index) { @if (task.data === day) {
+      <li class="task" cdkDragLockAxis="x" cdkDrag >
+        <div (click)="changeStatus(task.id,$event)" class="status"></div>
+        <span >{{ task.content }}</span>
+      </li>
+      } }
+    </ul>
+  </div>
+</div>

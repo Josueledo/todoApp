@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <p>Create new Task</p>
+  <mat-form-field>
+    <mat-label for="task">Task</mat-label>
+    <input matInput type="text" placeholder="task" #task />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNo()" class="cancel">Cancel</button>
+  <button
+  class="create"
+    mat-button
+    cdkFocusInitial
+    (click)="onYes(task.value)"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,169 @@
+@import "../../../styles.scss";
+.container {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: $color2;
+  header {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $color1;
+    padding: 40px;
+    padding-bottom: 0;
+    color: rgb(218, 218, 218);
+    z-index: 5;
+    position: relative;
+    .date {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    ul {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+  .daysContainer {
+    background-color: $color1;
+    color: rgb(218, 218, 218);
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    overflow-x: scroll;
+    padding: 20px;
+    padding-top: 5px;
+    z-index: 5;
+    position: relative;
+    li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-weight: 400;
+      min-width: 50px;
+      font-size: 1.5rem;
+      color: rgb(88, 88, 88);
+      transition: all 0.3s;
+      &.selected {
+        font-size: 3rem;
+        color: white;
+        font-weight: 600;
+      }
+      .dayName {
+        font-weight: 300;
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .delete{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20%;
+    height: 100vh;
+    background-color: rgba(255, 0, 0, 0);
+    z-index: 0;
+  }
+  .edit{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    height: 100vh;
+    background-color: rgba(195, 255, 0, 0);
+    z-index: 1;
+  }
+  .tasks {
+    width: 100%;
+    min-height: auto;
+    background-color: $color2;
+    color: white;
+    padding: 10px;
+    h1 {
+      margin: 20px;
+      font-weight: 300;
+    }
+    ul {
+      margin-top: 60px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      li {
+        list-style: none;
+        color: white;
+        width: 80%;
+        height: 90px;
+        background-color: rgb(25, 25, 25);
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        z-index: 4;
+        border: 2px solid rgb(227, 39, 22);
+        .status{
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border-radius: 50px;
+          background-color: rgb(227, 39, 22);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.321);
+          right: 0;
+          top: 0;
+          margin: 10px;
+          z-index: 6;
+        }
+        // &:first-child {
+        //   background-color: rgb(43, 84, 113);
+        // }
+      }
+    }
+  }
+}
+*::-webkit-scrollbar {
+  width: 3px;
+}
+* {
+  scrollbar-width: none;
+}
+
+.cdk-drag-preview {
+  list-style: none;
+  color: white;
+  width: 80%;
+  height: 80px;
+  background-color: rgb(90, 90, 90);
+  border-radius: 20px;
+  padding: 20px;
+  .status{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    background-color: rgb(179, 52, 52);
+    right: 0;
+    top: 0;
+    margin: 10px;
+    z-index: 6;
+
+  }
+  span {
+  }
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}

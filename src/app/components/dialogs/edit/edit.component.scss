@@ -1,0 +1,32 @@
+mat-form-field{
+  margin-top: 20px;
+
+}
+mat-dialog-content{
+  display: flex;
+  flex-direction: column;
+}
+button{
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  transition: all .3s;
+  &:hover{
+    cursor: pointer;
+    opacity: .8;
+  }
+}
+mat-dialog-actions{
+  display: flex;
+  gap: 10px;
+}
+.cancel{
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid rgb(93, 93, 196);
+}
+.create{
+  background-color: rgb(93, 93, 196);
+  border: 2px solid rgb(93, 93, 196);
+  color: white;
+
+}

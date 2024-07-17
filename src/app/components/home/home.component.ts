@@ -52,6 +52,60 @@ export class HomeComponent {
     this.getTasks();
     this.alignDays();
   }
+  ngAfterViewInit() {
+    this.alignDays();
+    this.onAnimate();
+  }
+  onAnimate() {
+    const alltasks = document.querySelectorAll('.task');
+    alltasks.forEach((task) => {
+      task.classList.add('animate__fadeInLeft');
+      task.addEventListener('animationend', (event) => {
+        console.log('animacao finalizda');
+        task.classList.remove('animate__fadeInLeft');
+      });
+    });
+  }
+
+  changeDay($event: any) {
+    this.day = $event;
+    this.alignDays();
+  }
+
+  openDialog() {
+    this.dialog
+      .open(CreateComponent)
+      .afterClosed()
+      .subscribe((data: string) => {
+        let dataObj = {
+          id: 0,
+          content: data,
+          data: this.day,
+          status: false,
+        } as any;
+        if (data === '' || data === undefined) {
+          this.getTasks();
+          return;
+        } else {
+          this.onCreate(dataObj);
+        }
+      });
+  }
+
+  alignDays() {
+    const daysContainer =
+      document.querySelector<HTMLElement>('.daysContainer')!;
+    if (this.day > 3 && this.day < this.totalDays - 3) {
+      daysContainer.scrollLeft = this.day * 80 - 250;
+    }
+  }
+
+  getTasks() {
+    const localData = localStorage.getItem('tasks');
+    if (localData != null) {
+      this.listTasks = JSON.parse(localData);
+    }
+  }
   getDays() {
     this.totalDays = new Date(
       this.data.getFullYear(),
@@ -71,48 +125,6 @@ export class HomeComponent {
           ],
       };
       this.listDays.push(obj);
-    }
-  }
-  changeDay($event: any) {
-    this.day = $event;
-    this.alignDays();
-  }
-
-  openDialog() {
-    this.dialog
-      .open(CreateComponent)
-      .afterClosed()
-      .subscribe((data: string) => {
-        let dataObj = {
-          id: 0,
-          content: data,
-          data: this.day,
-          status: false,
-        } as any;
-        if (data === '' || data === undefined) {
-          this.getTasks()
-          return;
-        }else{
-          this.onCreate(dataObj);
-        }
-      });
-  }
-
-  alignDays() {
-    const daysContainer =
-      document.querySelector<HTMLElement>('.daysContainer')!;
-    if (this.day > 3 && this.day < this.totalDays - 3) {
-      daysContainer.scrollLeft = this.day * 80 - 260;
-    }
-  }
-  ngAfterViewInit() {
-    this.alignDays();
-  }
-
-  getTasks() {
-    const localData = localStorage.getItem('tasks');
-    if (localData != null) {
-      this.listTasks = JSON.parse(localData);
     }
   }
 
@@ -138,20 +150,20 @@ export class HomeComponent {
       this.editDialog();
     }
   }
-  changeStatus(id: number, $event: any) {
-    const taskIndex = this.listTasks.findIndex((m) => m.id === id);
-    let currentTask = this.listTasks[taskIndex];
-
-    currentTask.status = !currentTask.status;
+  changeStatus(task: any, $event: any) {
+    task.status = !task.status;
     console.log($event.target.parentElement);
-    if (!currentTask.status) {
-      $event.target.style = 'background: rgb(227, 39, 22)';
-      $event.target.parentElement.style =     "border: 2px solid rgb(227, 39, 22)"
+    const el = $event.target.parentElement;
 
-    } else {
-      $event.target.style = 'background: rgb(114, 218, 82)';
-      $event.target.parentElement.style =     "border: 2px solid rgb(114, 218, 82)"
-    }
+    el.classList.add('animate__animated');
+
+
+    el.classList.add('animate__fadeInLeft');
+    el.addEventListener('animationend', () => {
+      el.classList.remove('animate__fadeInLeft');
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(this.listTasks));
   }
 
   editDialog() {
@@ -159,9 +171,9 @@ export class HomeComponent {
       .open(EditComponent)
       .afterClosed()
       .subscribe((data) => {
-        console.log(data)
+        console.log(data);
         if (data === '' || data === undefined) {
-          this.getTasks()
+          this.getTasks();
           return;
         } else {
           this.onEdit({

@@ -66,11 +66,21 @@
   >
     <h1>Today's task</h1>
     <ul>
-      @for (task of listTasks; track $index) { @if (task.data === day) {
-      <li class="task" cdkDragLockAxis="x" cdkDrag >
-        <div (click)="changeStatus(task.id,$event)" class="status"></div>
-        <span >{{ task.content }}</span>
-      </li>
+      @for (task of listTasks; track $index) {
+         @if (task.data === day) {
+          @if(task.status === false){
+            <li class="task animate__animated" cdkDragLockAxis="x" cdkDrag style="border: 2px solid rgb(227, 39, 22)" >
+              <div (click)="changeStatus(task,$event)" class="status" style="background: rgb(227, 39, 22)"></div>
+              <span >{{ task.content }}</span>
+            </li>
+          }
+          @else {
+            <li class="task animate__animated" cdkDragLockAxis="x" cdkDrag style="border: 2px solid rgb(114, 218, 82)" >
+              <div (click)="changeStatus(task,$event)" class="status" style="background: rgb(114, 218, 82)"></div>
+              <span >{{ task.content }}</span>
+            </li>
+
+          }
       } }
     </ul>
   </div>

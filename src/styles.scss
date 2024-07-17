@@ -43,5 +43,7 @@ $todoApp-theme: mat.define-theme((
 $color1:rgb(27, 27, 27);
 $color2:rgb(10, 10, 10);
 
+@import 'animate.css';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: "Poppins", "Helvetica Neue", sans-serif; }

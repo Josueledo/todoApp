@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 .container {
-  width: 100%;
+  max-width: 400px;
   min-height: 100vh;
   overflow-x: hidden;
   background-color: $color2;
@@ -108,6 +108,7 @@
         list-style: none;
         color: white;
         width: 80%;
+        max-width: 300px;
         height: 90px;
         background-color: rgb(25, 25, 25);
         border-radius: 20px;
@@ -138,7 +139,7 @@
   width: 3px;
 }
 * {
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
 
 .cdk-drag-preview {

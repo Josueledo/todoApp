@@ -1,3 +1,6 @@
+<body>
+
+
 <div class="container">
   <header>
     <ul>
@@ -72,6 +75,20 @@
             <li class="task animate__animated" cdkDragLockAxis="x" cdkDrag style="border: 2px solid rgb(227, 39, 22)" >
               <div (click)="changeStatus(task,$event)" class="status" style="background: rgb(227, 39, 22)"></div>
               <span >{{ task.content }}</span>
+              <div class="deleteAlert">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example delete icon"
+                fontIcon="delete"
+                ></mat-icon>
+              </div>
+              <div class="editAlert">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example edit icon"
+                fontIcon="edit"
+                ></mat-icon>
+              </div>
             </li>
           }
           @else {
@@ -85,3 +102,4 @@
     </ul>
   </div>
 </div>
+</body>

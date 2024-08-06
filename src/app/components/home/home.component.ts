@@ -95,8 +95,10 @@ export class HomeComponent {
   alignDays() {
     const daysContainer =
       document.querySelector<HTMLElement>('.daysContainer')!;
+    const container =  document.querySelector<HTMLElement>('.container')!;
     if (this.day > 3 && this.day < this.totalDays - 3) {
-      daysContainer.scrollLeft = this.day * 80 - 250;
+      daysContainer.scrollLeft = this.day * 80 - (container.scrollWidth / 1.7);
+      console.log(container.scrollWidth / 1.7)
     }
   }
 

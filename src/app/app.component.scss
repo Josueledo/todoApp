@@ -1,7 +1,19 @@
 .container{
-  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(50, 50, 50);
+  overflow-x: hidden;
+  background-color: rgb(24, 24, 24);
+
+}
+app-home{
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.658);
+  overflow: hidden;
+}
+@media (width <= 430px) {
+  .container{
+      width: 430px;
+
+  }
 }
